@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import re
-import datetime
+
 
 from scrapy.http import Request
 from urllib import parse
+from selenium import webdriver
+from scrapy.xlib.pydispatch import dispatcher 
+from scrapy import signals
+
+
+
+from bole.items import JobBoleArticleItem, ArticleItemLoader
+from bole.function import get_md5
 
 
 class JobboleSpider(scrapy.Spider):
@@ -29,12 +36,13 @@ class JobboleSpider(scrapy.Spider):
         if next_url:
             yield Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
 
-    
+    """
     def parse_detail(self, response):
 
         front_image_url = response.meta.get('front_image_url', '')
         item_loader = ArticleItemLoader(item=JobBoleArticleItem(), response=response)
         item_loader.add_css("title", ".entry-header")
-
+        item_loader.add_xpath
+    """
 
 
