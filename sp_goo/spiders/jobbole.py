@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
 import re
 import datetime
 
@@ -15,7 +14,7 @@ class JobboleSpider(scrapy.Spider):
 
     def parse(self, response):
         
-        posts_nodes = response.xpath("//*[@id="archive"]/div[1]/div[2]/p[1]/a[1]")
+        posts_nodes = response.xpath('//*[@id="archive"]/div[1]/div[2]/p[1]/a[1]')
         for post_node in post_nodes:
             image_url = post_node.xpath('//*[@id="archive"]/div[1]/div[1]/a/img').extract_first("")
             post_url = post_node.xpath('//*[@id="archive"]/div[1]/div[2]/span/p').extract_first("")
@@ -29,6 +28,13 @@ class JobboleSpider(scrapy.Spider):
         next_url = response.xpath('//*[@id="archive"]/div[21]/a[4]').extract_first("")  ##下一页(next page-numbers)
         if next_url:
             yield Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
+
+    
+    def parse_detail(self, response):
+
+        front_image_url = response.meta.get('front_image_url', '')
+        item_loader = ArticleItemLoader(item=JobBoleArticleItem(), response=response)
+        item_loader.add_css("title", ".entry-header")
 
 
 
