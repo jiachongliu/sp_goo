@@ -13,14 +13,14 @@ import os
 
 
 
-BOT_NAME = 'sp_goo'
+BOT_NAME = 'bole'
 
-SPIDER_MODULES = ['sp_goo.spiders']
-NEWSPIDER_MODULE = 'sp_goo.spiders'
+SPIDER_MODULES = ['bole.spiders']
+NEWSPIDER_MODULE = 'bole.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'sp_goo (+http://www.yourdomain.com)'
+USER_AGENT = 'bole (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False 

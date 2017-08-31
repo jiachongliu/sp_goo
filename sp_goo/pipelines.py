@@ -7,25 +7,24 @@
 
 
 import pymysql
-import pymysql.cursors
 
+from scrapy.pipelines.images import ImagesPipeline
 from twisted.enterprise import adbapi
 
 
+class ArticleImagePipline(ImagesPipeline):
+    def item_completed(self, results, item, info):
+        try:
+            if "front_image_url" in item:
+                for ok, value in results:
+                    image_file_path = value["path"]
+                item["front_image_path"] = image_file_path
+            return item
+        except Exception as e:
+            print(e)
+            item["front_image_path"] = "图片不可用"
+            return item
 
-class MysqlPipeline(object):
-    def __init__(self):
-        self.conn = pymysql.connect('192.168.0.106', 'root', 'root', 'article_spider', charset="utf8", use_unicode=True)
-        self.cursors = self.conn.cursors()
-
-    def process_item(self, item, spider):
-        insert_sql = """
-            insert into jobbole_article(title, url, create_date, fav_nums)
-            VALUES(%s, %s, %s, %s)
-        """
-
-        self.cursors.execute(insert_sql, (item["title"], item["url"], item["create_date"], item["fav_nums"]))
-        self.conn.commit()
 
 
 class MysqlTwistedPipline(object):
@@ -43,7 +42,7 @@ class MysqlTwistedPipline(object):
                 use_unicode = True,
                 )
 
-        dbpool = adbapi.ConnectionPool("MySQLdb", **dbparms)
+        dbpool = adbapi.ConnectionPool("pymysql", **dbparms)
 
         return cls(dbpool)
 
@@ -56,7 +55,7 @@ class MysqlTwistedPipline(object):
 
     def do_insert(self, cursors, item):
         insert_sql, params = item.get_insert_sql()
-        print(insert_sql, params)
+       # print(insert_sql, params)
         cursors.execute(insert_sql, params)
 
 """
