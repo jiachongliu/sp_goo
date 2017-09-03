@@ -49,7 +49,7 @@ class RandomUserAgentMiddleware(object):
 class JSPageMiddleware(object):
 
     def process_request(self, request, spider):
-        if spider.name == "JobBole":
+        if spider.name == "jobbole":
             try:
                 spider.browser.get(request.url)
             except TimeoutException:

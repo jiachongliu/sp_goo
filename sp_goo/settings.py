@@ -13,14 +13,14 @@ import os
 
 
 
-BOT_NAME = 'bole'
+BOT_NAME = 'sp_goo'
 
-SPIDER_MODULES = ['bole.spiders']
-NEWSPIDER_MODULE = 'bole.spiders'
+SPIDER_MODULES = ['sp_goo.spiders']
+NEWSPIDER_MODULE = 'sp_goo.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'bole (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.54 Safari/536.5'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False 
@@ -31,7 +31,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 20
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -80,10 +80,11 @@ IMAGES_STORE = os.path.join(project_dir, 'images')
 
 
 
-MYSQL_HOST = "localhost"
-MYSQL_DBNAME = "sp_goo"
+MYSQL_HOST = "127.0.0.1"
+MYSQL_DBNAME = "article_spider"
 MYSQL_USER = "root"
-MYSQL_PASSWORD = "root"
+MYSQL_PASSWORD = "123456"
+MYSQL_PORT = 3306
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

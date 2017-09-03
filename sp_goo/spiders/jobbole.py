@@ -10,8 +10,8 @@ from scrapy import signals
 
 
 
-from bole.items import JobBoleArticleItem, ArticleItemLoader
-from bole.function import get_md5
+from sp_goo.items import JobBoleArticleItem, ArticleItemLoader
+from sp_goo.function import get_md5
 
 
 class JobboleSpider(scrapy.Spider):
