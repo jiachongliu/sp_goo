@@ -16,10 +16,14 @@ from bole.function import get_md5
 
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
-    allowed_domains = ['python.jobbole.com']
+    allowed_domains = ["python.jobbole.com"]
     start_urls = ['http://python.jobbole.com/all-posts/']
 
     def parse(self, response):
+
+        if response.status == 404:
+            self.fail_urls.append(response.url)
+            self.crawler.stats.inc_value("failed_url")
         
         posts_nodes = response.xpath('//*[@id="archive"]/div[1]/div[2]/p[1]/a[1]')
         for post_node in post_nodes:
