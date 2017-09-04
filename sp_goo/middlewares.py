@@ -23,10 +23,10 @@ class RandomUserAgentMiddleware(object):
     def __init__(self, crawler):
         super(RandomUserAgentMiddleware, self).__init__()
 
-        self.ua = UserAgent()
+        self.ua        = UserAgent()
         self.per_proxy = crawler.settings.get('RANDOM_UA_PER_PROXY', False)
-        self.ua_type = crawler.settings.get('RANDOM_UA_TYPE', 'random')
-        self.proxy2ua = {}
+        self.ua_type   = crawler.settings.get('RANDOM_UA_TYPE', 'random')
+        self.proxy2ua  = {}
 
     def from_crawler(cls, crawler):
         return cls(crawler)

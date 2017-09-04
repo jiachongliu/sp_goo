@@ -10,14 +10,25 @@ from scrapy import signals
 
 
 
-from sp_goo.items import JobBoleArticleItem, ArticleItemLoader
-from sp_goo.function import get_md5
+from bole.items import JobBoleArticleItem, ArticleItemLoader
+from bole.function import get_md5
 
 
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
     allowed_domains = ["python.jobbole.com"]
     start_urls = ['http://python.jobbole.com/all-posts/']
+
+
+    handle_httpstatus_list = [404]
+
+    def __init__(self, **kwargs):
+        self.fail_urls = []
+        dispatcher.connect(self.handle_spider_closed, signals.spder_closed)
+
+    def handle_spider_closed(self, spider, reason):
+        self.crawler.stats.set_value("fail_urls", ",".join(self.fail_urls))
+
 
     def parse(self, response):
 
@@ -36,7 +47,7 @@ class JobboleSpider(scrapy.Spider):
                     callback=self.parse_datail
                     )
 
-        next_url = response.xpath('//*[@id="archive"]/div[21]/a[4]').extract_first("")  ##下一页(next page-numbers)
+        next_url = response.xpath('//*[@id="archive"]/div[21]/a[4]').extract_first('')  ##下一页(next page-numbers)
         if next_url:
             yield Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
 

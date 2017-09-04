@@ -5,30 +5,10 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-import MySQLdb
 import pymysql
 
 from scrapy.pipelines.images import ImagesPipeline
 from twisted.enterprise import adbapi
-
-
-
-class MysqlPipeline(object):
-    def __init__(self):
-        host = "127.0.0.1"
-        user = "root"
-        password = "123456"
-        dbname = "article_spiders"
-        port = 33060
-        self.conn = MySQLdb.connect(host, user, password, 
-                port=port, charset="utf8", use_unicode=True)
-        self.cursors = self.conn.cursors()
-
-    def process_item
-
-
-
-
 
 
 class ArticleImagePipline(ImagesPipeline):
@@ -72,10 +52,10 @@ class MysqlTwistedPipline(object):
     def handle_error(self, failure, item, spider):
         print(failure)
 
-    def do_insert(self, cursors, item):
+    def do_insert(self, cursor, item):
         insert_sql, params = item.get_insert_sql()
        # print(insert_sql, params)
-        cursors.execute(insert_sql, params)
+        cursor.execute(insert_sql, params)
 
 """
 class SpGooPipeline(object):

@@ -83,9 +83,9 @@ class JobBoleArticleItem(scrapy.Item):
         if self["front_image_url"]:
             fron_image_url = self["front_image_url"][0]
         params = (self["title"], self["url"], self["create_date"],
-                self["fav_nums"], fron_image_url, self["front_image_path"],
-                self["url_object_id"], self["praise_nums"], self["comment_nums"], 
-                self["tags"], self["content"])
+                  self["fav_nums"], fron_image_url, self["front_image_path"],
+                  self["url_object_id"], self["praise_nums"], self["comment_nums"], 
+                  self["tags"], self["content"])
 
         return insert_sql, params
 
