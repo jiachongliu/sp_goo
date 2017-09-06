@@ -11,6 +11,7 @@ from scrapy import signals
 from sp_goo.items import JobBoleArticleItem,ArticleItemLoader
 from sp_goo.function import get_md5
 
+
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
     allowed_domains = ["python.jobbole.com"]
