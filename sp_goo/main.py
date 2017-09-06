@@ -1,4 +1,4 @@
-__author__ = 'jiachongliu'
+__author__ = 'Lijing'
 
 from scrapy.cmdline import execute
 
