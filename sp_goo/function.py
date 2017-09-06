@@ -3,7 +3,6 @@ __author__ = 'jiachongliu'
 
 import hashlib
 
-
 def get_md5(url):
 
     if isinstance(url, str):

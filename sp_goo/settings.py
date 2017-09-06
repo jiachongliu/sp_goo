@@ -11,8 +11,6 @@
 import os
 
 
-
-
 BOT_NAME = 'sp_goo'
 
 SPIDER_MODULES = ['sp_goo.spiders']
@@ -68,16 +66,14 @@ COOKIES_ENABLED = False
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'sp_goo.pipelines.SpGooPipeline': 300,
-    'scrapy.pipelines.images.ImagesPipeline': 1
-}
+#ITEM_PIPELINES = {
+#    'sp_goo.pipelines.SpGooPipeline': 300,
+#    'scrapy.pipelines.images.ImagesPipeline': 1
+#}
 
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
-
 IMAGES_STORE = os.path.join(project_dir, 'images')
-
 
 
 MYSQL_HOST = "127.0.0.1"

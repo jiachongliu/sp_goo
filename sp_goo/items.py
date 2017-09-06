@@ -88,13 +88,3 @@ class JobBoleArticleItem(scrapy.Item):
                   self["tags"], self["content"])
 
         return insert_sql, params
-
-
-
-
-"""
-class SpGooItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
-"""
